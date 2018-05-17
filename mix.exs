@@ -6,9 +6,9 @@ defmodule RelaxNote.MixProject do
       app: :relax_note,
       version: "0.1.0",
       elixir: "~> 1.5",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
     ]
@@ -26,19 +26,21 @@ defmodule RelaxNote.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, path: "../..", override: true},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
+      {:plug, github: "elixir-plug/plug", override: true},
+      {:phoenix, github: "phoenixframework/phoenix", override: true},
+      {:phoenix_pubsub, github: "phoenixframework/phoenix_pubsub", override: true},
+      {:phoenix_ecto, github: "phoenixframework/phoenix_ecto", override: true},
+      {:phoenix_html, github: "phoenixframework/phoenix_html", override: true},
+      {:phoenix_live_reload,
+       github: "phoenixframework/phoenix_live_reload", only: :dev, override: true},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:cowboy, "~> 1.0"}
@@ -55,7 +57,7 @@ defmodule RelaxNote.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end
