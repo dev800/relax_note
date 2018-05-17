@@ -33,6 +33,7 @@ defmodule RelaxNote.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:kulib, path: "vendor/kulib", override: true},
       {:plug, github: "elixir-plug/plug", override: true},
       {:phoenix, github: "phoenixframework/phoenix", override: true},
       {:phoenix_pubsub, github: "phoenixframework/phoenix_pubsub", override: true},
